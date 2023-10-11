@@ -1,1 +1,92 @@
 
+Vamos a levantar un servidor de base de datos mysql y lo conectaremos al gestor Phpmyadmin.
+Puedes conectar dos contenedores, uno de phpMyAdmin y otro de MySQL, en Docker usando Docker Compose. 
+Docker Compose es una herramienta que permite definir y ejecutar aplicaciones Docker multi-contenedor 
+de una manera más sencilla y ordenada. Aquí hay un ejemplo de cómo puedes configurar un archivo docker-compose.yml 
+para conectar un contenedor de phpMyAdmin con un contenedor de MySQL:
+
+    Crea un directorio para tu proyecto y crea un archivo docker-compose.yml en ese directorio.
+
+    Edita el archivo docker-compose.yml con la siguiente configuración:
+    
+   
+    version: '3'
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
+    networks:
+      - mynet
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    links:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    networks:
+      - mynet
+networks:
+  mynet:
+
+Hay que cambiar MYSQL_ROOT_PASSWORD y MYSQL_DATABASE por los valores deseados
+En este archivo docker-compose.yml, hemos definido dos servicios: db (el contenedor de MySQL) y phpmyadmin (el contenedor de phpMyAdmin).
+Aquí tienes una breve explicación de las secciones clave:
+
+    db: Este servicio utiliza la imagen oficial de MySQL y configura algunas variables de entorno, como la contraseña de root
+    y el nombre de la base de datos. El puerto 3306 se expone para que phpMyAdmin pueda conectarse a MySQL.
+
+    phpmyadmin: Este servicio utiliza la imagen oficial de phpMyAdmin. Está vinculado al servicio db (el contenedor de MySQL)
+    para que pueda acceder a la base de datos. Además, se exponen el puerto 80 para acceder a phpMyAdmin a través de un 
+    navegador web y se configuran las variables de entorno para que phpMyAdmin sepa cómo conectarse a MySQL.
+
+    networks: Se crea una red personalizada llamada mynet para que los contenedores puedan comunicarse entre sí.
+
+    Guarda el archivo docker-compose.yml y, desde el directorio del proyecto, ejecuta el siguiente comando para iniciar los 
+    contenedores:
+    
+    docker-compose up -d
+    
+    Esto creará y ejecutará los contenedores de phpMyAdmin y MySQL según la configuración del archivo docker-compose.yml. 
+    Puedes acceder a phpMyAdmin en tu navegador web visitando http://localhost:8080 (o la dirección IP de tu máquina si 
+    estás utilizando un servidor remoto). Luego, puedes usar las credenciales de MySQL configuradas en el archivo 
+    docker-compose.yml para iniciar sesión en phpMyAdmin y administrar tu base de datos MySQL.
+
+Espero que esto te ayude a conectar un contenedor de phpMyAdmin con un contenedor de MySQL en Docker.
+
+Puedes comprobar los containers con docker ps 
+
+
+POr otro lado, si se desea conectarse con un ORM como sequelize, debes saber cual es la IP del container de Mysql
+con el comando: 
+
+docker inspect <ID container Mysql> | grep IPAddress
+
+Una vez que sepas cual es la direccion IP, se lo ponemos en el archivo de configuracion de Squelize
+
+import Sequelize from "sequelize";
+const db = new Sequelize('agenciaViajes', 'root', '1234', {
+    host: '172.20.0.2', /* <========================================= ESta es la IP a editar */
+    port: 3306,
+    dialect: 'mysql',
+    define: {
+        timestamps: false,    
+    },
+    pool: {
+        max: 5,
+        min:0,
+        acquire: 30000,
+        idle: 10000
+    },
+    operatorAliases: false
+})
+
+export default db;
