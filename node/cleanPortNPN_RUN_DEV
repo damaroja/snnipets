@@ -1,1 +1,37 @@
 
+
+Creamos un archivo sh en el mismo nivel que package.json
+Y le agregamos estas lineas:
+************************************************************
+
+#!/bin/bash
+
+# Define el número de puerto
+PORT=3000
+
+# Encuentra el PID del proceso que utiliza el puerto especificado
+PID=$(lsof -t -i :$PORT)
+
+if [ -z "$PID" ]; then
+  echo "No se encontró ningún proceso utilizando el puerto $PORT."
+else
+  echo "Se encontró un proceso utilizando el puerto $PORT con el PID: $PID"
+  echo "Terminando el proceso..."
+  kill -9 $PID
+  echo "Proceso terminado."
+fi
+
+
+*****************************************************************
+
+Si llamamos al archivo portCleaner.sh le damos permisos de ejecucion:
+
+ chmod +x portCleaner.sh
+
+Añadimos al package.json la linea script:
+
+"scripts": {
+    "dev": "sudo ./portCleaner.sh && nodemon index.js"
+  },
+
+Nodemon debe de estar instalado.
