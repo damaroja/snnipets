@@ -9,8 +9,7 @@ para conectar un contenedor de phpMyAdmin con un contenedor de MySQL:
 
     Edita el archivo docker-compose.yml con la siguiente configuración:
     
-   
-    version: '3'
+version: '3'
 services:
   db:
     image: mysql:latest
@@ -36,6 +35,7 @@ services:
       - mynet
 networks:
   mynet:
+
 
 Hay que cambiar MYSQL_ROOT_PASSWORD y MYSQL_DATABASE por los valores deseados
 En este archivo docker-compose.yml, hemos definido dos servicios: db (el contenedor de MySQL) y phpmyadmin (el contenedor de phpMyAdmin).
