@@ -1,0 +1,66 @@
+/* Este archivo de configuracion sirve para tener un ORM para MYSQL con PHPMYADMIN */
+//Instala sequelize con npm
+// Crea un archivo config.js en la raiz  con esto:
+
+
+const DB = new Sequelize('AgenciaViajes', 'root', '1234', {
+    host: '172.20.0.2',
+    port:3306,
+    dialect: 'mysql',
+    // Otras opciones de configuración de Sequelize:
+    pool: {
+      max: 5, // Número máximo de conexiones en el grupo de conexiones
+      min: 0, // Número mínimo de conexiones en el grupo de conexiones
+      acquire: 30000, // Tiempo máximo, en milisegundos, para adquirir una conexión
+      idle: 10000, // Tiempo máximo, en milisegundos, que una conexión puede estar inactiva
+    },
+    logging: false, // Desactivar los registros SQL (establecer en false para silenciar)
+    define: {
+      timestamps: false,
+      underscored: false, // Utilizar nombres de columnas en snake_case en lugar de camelCase
+    },
+    timezone: '+00:00', // Zona horaria para las consultas de la base de datos
+    operatorAliases: false, // Desactivar operadores obsoletos (se recomienda)
+  });
+
+export default DB
+
+
+//Despues debemos crear el squema o Model. Crea un archivo db.js con el esquema. Este es un ejemplo:
+
+
+
+import Sequelize from 'sequelize'   <===== Inportamos Sequelize
+import DB from '../config.js'
+
+const Viaje = DB.define('viajes', {
+    titulo: {
+        type: Sequelize.STRING
+    },
+    precio: {
+        type: Sequelize.STRING
+    },
+    fecha_ida: {
+        type: Sequelize.DATE
+    },
+    fecha_vuelta: {
+        type: Sequelize.DATE
+    },
+    imagen: {
+        type: Sequelize.DATE
+    },
+    descripcion: {
+        type: Sequelize.STRING
+    },
+    disponibles: {
+        type: Sequelize.STRING
+    },
+    slug: {
+        type: Sequelize.STRING
+    }  
+})
+
+export default Viaje
+
+
+
