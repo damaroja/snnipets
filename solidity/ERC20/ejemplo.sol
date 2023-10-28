@@ -3,7 +3,7 @@
 pragma solidity ^0.8.4;
 
 
-import "./p1.sol";
+import "./erc20.sol";
 
 
 contract Palomitas is ERC20{
