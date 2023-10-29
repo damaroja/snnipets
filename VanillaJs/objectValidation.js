@@ -8,3 +8,7 @@ function validarCamposNoVacios(objeto) {
   }
   return true; // Si todos los campos tienen valores, la validación es exitosa
 }
+
+
+
+//Valida si todos los campos del objeto es no vacio
