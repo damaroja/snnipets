@@ -1,13 +1,9 @@
 
 
 
-
+**********************CREACION DE LA BASE DE DATOS INDEXEDDB********************************
 
 let DB;
-
-document.addEventListener('DOMContentLoaded', () => {
-    crearDB()
-})
 
 
 function crearDB(){
@@ -38,22 +34,12 @@ function crearDB(){
 // Adapatala a tu gusto
 
 
+//***************************ADICCION DE UN REGISTRO**************************************
 
-
-
-//*******************************************************************************************
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    conectarDB()
-    agregarBtn.addEventListener('click', validarCliente)
-})
-
- 
 let DB;
 
 
-//ESta funcion conecta la base de datos a la aplicacion
+//Esta funcion conecta la base de datos a la aplicacion
 function conectarDB(){
     const abrirConexion = window.indexedDB.open('crm', 1)
     abrirConexion.onerror = function(){
@@ -64,76 +50,40 @@ function conectarDB(){
     }
 }
 
-//Esta funcion valida al cliente y lo añade a la base de datos
-function validarCliente(){
-    const nombre = nombreInput.value
-    const email = emailInput.value
-    const telefono = telefonoInput.value
-    const empresa = empresaInput.value
-    const isValid = [nombre, email, telefono, empresa].some(item => item.trim() ==='')
-    if(isValid){
-        mostrarAlerta('Algun campo esta vacio', 'error', alerta)
-        return;
-    }
-    const cliente = { 
-        nombre, 
-        email, 
-        telefono, 
-        empresa,
-        id: Math.floor(Math.random() * 100000000000) + Date.now()
-    }
-    crearNuevoClient(cliente)
-}
-
 //Esta funcion añade el cliente a la base de datos indexedDB
 function crearNuevoClient(cliente){
     const transaction = DB.transaction(['crm'], 'readwrite')
     const objectStore = transaction.objectStore('crm')
     objectStore.add(cliente)
     transaction.onerror = function(){
-        console.log('Hubo un error');
-        mostrarAlerta('Hubo un problema intentando agregar un cliente', 'error', alerta)
-        return
+        //LO que se desea hacer en el caso de error
     }
     transaction.oncomplete = function(){
-        console.log('Agregado correctamente');
-        mostrarAlerta('El cliente se agrego correctamente', 'success', alerta)
-        limpiarForm()
-        return;
+       //Lo que desea hacer en caso de exito en la accion
     }
 }
 
-//El reto son functiones auxiliares
-function mostrarAlerta(msg, type, nodo) {
-    limpiarNodo(nodo);
-    const p = document.createElement("p");
-    if (type === "error") {
-      p.classList.add("alert", "alert-danger", 'mt-4', 'w-75', 'm-auto');
-    } else {
-      p.classList.add("alert", "alert-success", 'mt-4', 'w-75', 'm-auto');
+//*************************************LECTURA DE LOS REGISTROS*************************************
+
+function obtenerClientes(){
+    const abrirConexion = window.indexedDB.open('crm', 1)
+    abrirConexion.onerror = function(){
+        console.log('Hubo un error');
     }
-    p.textContent = msg;
-    nodo.appendChild(p);
-    setTimeout(() => {
-      p.remove();
-    }, 3000);
-  }
-  
-  function limpiarNodo(nodo) {
-    while (nodo.hasChildNodes()) {
-      nodo.removeChild(nodo.firstChild);
-    }
-  }
+    abrirConexion.onsuccess = function(){
+        DB = abrirConexion.result;
+        const objectStore = DB.transaction('crm').objectStore('crm');       
+        objectStore.openCursor = e.target.result;
+        if(cursor){
+            const { nombre, empresa, email, telefono, id } = cursor.value;
+            listadoClientes.innerHTML += ``       
+            cursor.continue()
+        } else {
+            console.log('No hay mas registros');
+        }
+    }  
+} 
 
-
-  function limpiarForm(){
-    nombreInput.value = ''
-    emailInput.value = ''
-    telefonoInput.value = ''
-    empresaInput.value = ''
-  }
-
-//***************************************************************************************************
 
 
 
