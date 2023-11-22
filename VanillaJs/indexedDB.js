@@ -30,6 +30,8 @@ function crearDB(){
 }
 
 
+
+
 //Esta funcion crea una base de datos con indexDB con los campos nombre, email telefono, empresa y id
 // Adapatala a tu gusto
 
@@ -121,6 +123,10 @@ function obtenerClientes(){
         }
     }  
 }
+
+
+*********************************ELIMINACION DE UN REGISTRO********************************************
+
 
 
 
