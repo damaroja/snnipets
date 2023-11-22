@@ -64,25 +64,60 @@ function crearNuevoClient(cliente){
 }
 
 //*************************************LECTURA DE LOS REGISTROS*************************************
-
 function obtenerClientes(){
     const abrirConexion = window.indexedDB.open('crm', 1)
     abrirConexion.onerror = function(){
         console.log('Hubo un error');
     }
-    abrirConexion.onsuccess = function(){
+    abrirConexion.onsuccess = function(e){
         DB = abrirConexion.result;
         const objectStore = DB.transaction('crm').objectStore('crm');       
-        objectStore.openCursor = e.target.result;
-        if(cursor){
-            const { nombre, empresa, email, telefono, id } = cursor.value;
-            listadoClientes.innerHTML += ``       
-            cursor.continue()
-        } else {
-            console.log('No hay mas registros');
+        objectStore.openCursor().onsuccess = function(e){
+            const cursor = e.target.result;
+            if(cursor){
+                const { nombre, empresa, email, telefono, id } = cursor.value;
+                const tr = document.createElement('tr')
+                const tdId = document.createElement('td')
+                tdId.textContent = id;
+                tr.appendChild(tdId)
+                const td = document.createElement('td')
+                td.textContent = nombre;
+                tr.appendChild(td)
+                const td2 = document.createElement('td')
+                td2.textContent = empresa;
+                tr.appendChild(td2)
+                const td3 = document.createElement('td')
+                td3.textContent = email;
+                tr.appendChild(td3)
+                const td4 = document.createElement('td')
+                td4.textContent = telefono;
+                tr.appendChild(td4)
+                const td5 = document.createElement('td')
+                const btnEliminar = document.createElement('button')
+                btnEliminar.classList.add('btn', 'btn-danger')
+                btnEliminar.innerHTML = '<i class="fas fa-trash-alt"></i>'
+                btnEliminar.onclick = eliminarCliente(id)
+                td5.appendChild(btnEliminar)
+                btnEliminar.textContent = 'Eliminar X'
+                const td6 = document.createElement('td')
+                const btnEditar = document.createElement('button')
+                btnEditar.classList.add('btn', 'btn-warning')
+                btnEditar.innerHTML = '<i class="fas fa-pen">X</i>'
+                btnEditar.onclick = editarCliente(id)
+                btnEditar.textContent = 'Editar E'
+                td6.appendChild(btnEditar)
+                const tdBtn = document.createElement('td')
+                tdBtn.appendChild(td5)
+                tdBtn.appendChild(td6)
+                tr.appendChild(tdBtn)
+                listadoClientes.appendChild(tr)
+                cursor.continue()
+            } else {
+                console.log('No hay mas registros');
+            }   
         }
     }  
-} 
+}
 
 
 
