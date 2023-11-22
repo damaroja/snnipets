@@ -51,16 +51,19 @@ function conectarDB(){
 }
 
 //Esta funcion añade el cliente a la base de datos indexedDB
-function crearNuevoClient(cliente){
-    const transaction = DB.transaction(['crm'], 'readwrite')
-    const objectStore = transaction.objectStore('crm')
-    objectStore.add(cliente)
+function crearNuevoCliente(cliente){
+    const transaction = DB.transaction(['crm'], 'readwrite');
+    const objectStore = transaction.objectStore('crm');
+    objectStore.add(cliente);
     transaction.onerror = function(){
-        //LO que se desea hacer en el caso de error
+        mostrarAlerta('Hubo un error', 'error', alerta);
     }
     transaction.oncomplete = function(){
-       //Lo que desea hacer en caso de exito en la accion
-    }
+        mostrarAlerta('Cliente agregado', 'success', alerta);
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 3000);
+    } 
 }
 
 //*************************************LECTURA DE LOS REGISTROS*************************************
