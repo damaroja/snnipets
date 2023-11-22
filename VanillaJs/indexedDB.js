@@ -127,7 +127,18 @@ function obtenerClientes(){
 
 *********************************ELIMINACION DE UN REGISTRO********************************************
 
-
+function eliminarCliente(id){
+    const transaction = DB.transaction(['crm'], 'readwrite')
+    const objectStore = transaction.objectStore('crm')
+    objectStore.delete(id)
+    transaction.oncomplete = function(){
+        console.log('Cliente eliminado');
+        window.location.href = 'index.html'
+    }
+    transaction.onerror = function(){
+        console.log('Hubo un error');
+    }
+}
 
 
 
