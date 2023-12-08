@@ -17,7 +17,7 @@ function saveItemJsonServer(objeto) {
         .catch( error => console.log(error));
 }
 
-Esto lista los objetos de la API de JSON SERVER
+//Esto lista los objetos de la API de JSON SERVER
 
 async function listarClientes() {
     const url = 'http://localhost:3000/clientes';
