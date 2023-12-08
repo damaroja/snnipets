@@ -41,3 +41,29 @@ async function listarClientes() {
             });
         })
 }
+
+
+// ESto es para editar los objetos en la API
+
+const url = `http://localhost:3000/clientes/${id}`;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cliente)
+        }
+        const response = await fetch(url, options);
+        if (response.status === 200) {
+            mostrarAlerta('Cliente editado correctamente', 'success', form);
+            nombreInput.value = '';
+            emailInput.value = '';
+            empresaInput.value = '';
+            telefonoInput.value = '';
+            window.location.href = 'index.html';
+        } else {
+            mostrarAlerta('Hubo un error', 'error', form);
+        }
+    } else {
+        mostrarAlerta('Todos los campos son obligatorios', 'error', form);
+    }
