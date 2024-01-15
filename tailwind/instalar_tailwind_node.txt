@@ -1,0 +1,39 @@
+
+
+Intalar tailwindcss :
+
+  npm i -D tailwindcss postcss autoprefixer postcss-cli
+
+Ejecutar: 
+
+  npx tailwindcss init -p
+
+En el archivo tailwind.config.js poner:
+
+  /** @type {import('tailwindcss').Config} */
+  export default {
+    content: ['./views/**/*.pug'],
+    theme: {
+      extend: {},
+    },
+    plugins: [],
+  }
+
+
+Crear una carpeta views en la raiz del proyecto y dentro otra 
+carpeta llamada css y dentro un archivo llamado tailwind.css y dentro 
+poner el siguiente codigo:
+
+  @tailwind base; 
+  @tailwind components;
+  @tailwind utilities;
+
+
+En el package.json poner el script:
+  "css": "postcss ./public/css/tailwind.css -o ./public/css/app.css"
+
+
+Y ya esta. Pon alguna clase css y ya se compila
+  
+
+
