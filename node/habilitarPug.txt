@@ -10,8 +10,10 @@ Una vez tenemos intslado pub, vamos a app.js y ponemos en la app
     app.set('views', './views');
 
 Tenemos que crear una carpeta en la raiz del proyecto llamado views
+y dentro de esta carpeta creamos los archivos .pug
 
 Y ya tenemos instalado Pug
+
 
 
 
