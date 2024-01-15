@@ -1,0 +1,27 @@
+
+
+
+Instalacion:
+
+  npm i -D tailwindcss postcss autoprefixer
+
+  npx tailwindcss init -p 
+
+En el archivo tailwind.config.css ponemos el siguiente codigo:
+
+  /** @type {import('tailwindcss').Config} */
+  export default {
+  content: ["index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+En index.css ponemos: 
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+
