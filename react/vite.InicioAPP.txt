@@ -1,0 +1,9 @@
+
+
+
+En la carpeta base ejecutamos:
+  npm init vite@latest
+
+cd <Carpeta de proyecto>
+npm i
+npm run dev
