@@ -18,9 +18,8 @@ y en el index.js
             }
         }
     }
+        
 
-
-
-
+No olvidar instalar cors con npm e importarlo. Despues aplicar: 
 
 app.use(cors(corsOptions))
