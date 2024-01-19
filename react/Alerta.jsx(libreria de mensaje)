@@ -1,0 +1,58 @@
+
+
+import React from "react";
+
+const Alert = ({ alerta }) => {
+  return (
+    <div
+      className={`${
+        alerta.error
+          ? "from-red-400 to-red-600"
+          : "from-indigo-400 to-indigo-600"
+      } bg-gradient-to-r text-white text-center font-bold py-5 px-4 rounded-lg mb-4 text-xl`}
+    >
+      {alerta.msg}
+    </div>
+  );
+};
+
+export default Alert;
+
+
+//Forma de Uso
+//***********************************************************************
+Lo puedes usar en un Usestate y la forma de llamarlo es en esta formato:
+  {
+        msg: "Los passwords no coinciden",
+        error: true,
+  }
+
+Si error es true, se muestra en rojo y si no, en azul
+Para usar en React, creamos un hook Usestate asi:
+
+  const [alerta, setAlerta] = usestate({})
+
+Y lo llamamos por ejemplo, de esta manera: 
+  const {msg} = alerta
+y dentro del return,
+  {msg && <Alert alerta={alerta} />}
+Si hay msg, se muestra la alerta, si no, no se muestra
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
