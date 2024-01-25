@@ -1,0 +1,14 @@
+
+
+
+
+Cuando en express te ponga undefined al poner 
+console.log(req.body), es que no esta habilitado express para eso.
+Hay que poner 
+
+  app.use(express.json());
+
+despues de const app= express()
+
+
+Y ya esta
