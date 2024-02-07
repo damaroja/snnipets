@@ -13,3 +13,32 @@ Despues tenemos una funcion que podemos obtener un id mas o menos bueno:
 
 
 Date.now().toString(32) + Math.random().toString(32).substring(2);
+
+
+Tambien tenemos un modulo bueno para generar un ID bestia: 
+
+
+import { randomUUID } from "crypto";
+
+export const generarID = () => {
+  const id =
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID() +
+    randomUUID();
+  return id.replace(/-/g, "");
+};
+
+console.log(generarID());
