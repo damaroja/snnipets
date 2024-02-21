@@ -37,7 +37,9 @@ Y lo llamamos por ejemplo, de esta manera:
 y dentro del return,
   {msg && <Alert alerta={alerta} />}
 Si hay msg, se muestra la alerta, si no, no se muestra
-  
+
+O lo llamamos de esta otra: 
+  { alerta.msg ? <Alerta alerta={alerta} /> : null }
 
 
 
