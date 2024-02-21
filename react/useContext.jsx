@@ -35,7 +35,7 @@ export default AuthContext;
 //archivo llamado useAuth, por ejemplo con el siguiente codigo:
 
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext"; // ESta es la ruta del Context
+import AuthContext from "../context/AuthProvider"; // ESta es la ruta del Context
 
 
 const useAuth = () => {
