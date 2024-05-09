@@ -1,0 +1,2 @@
+Ctrl + l (ele)   => Cursor en todas las ocurrencias
+Ctrl + ñ        => Elininar lineas
