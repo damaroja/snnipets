@@ -1,0 +1,5 @@
+Error Lents     => Permite ver los errores en el codigo
+Material Icon Theme   => Iconos para los archivos
+Auto Rename tags    => Renombra las etiquetas 
+Better Comments      => Mejora comentarios
+
