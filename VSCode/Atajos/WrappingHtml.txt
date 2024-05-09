@@ -1,0 +1,18 @@
+
+<p>
+    Ejecutar el comando
+    node --version
+    node --version
+</p>
+
+Seleccionar node --version
+ctrl + p   => poner >wrap y poner div>p.text-center
+
+<p>
+    Ejecutar el comando
+    node --version
+    <div>
+        <p class="texrt-center">node --version</p>
+    </div>
+</p>
+
