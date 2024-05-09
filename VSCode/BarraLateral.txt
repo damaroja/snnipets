@@ -5,4 +5,11 @@ buscar >barra actividad
 pulsar en ocultar/ ver barra actividad
 
 
+//Atajos de iconos:
+Crtl + May + E      =====>     Files
+Ctrl + May + F      =====>     Search
+Ctrl + May + G      =====>     Git
+Ctrl + May + X      =====>     Extensions
+
+
 
