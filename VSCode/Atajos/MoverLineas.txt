@@ -1,0 +1,30 @@
+
+
+alt + flecha up  ===>  linea Arriba
+alt + flecha down  ===> linea abajo
+
+Crtl + p   =>  >orden asc - desc   ====> ordena de formsa asc o des 
+Esto: 
+    <li>Línea 7</li>
+    <li>Línea 3</li>
+    <li>Línea 6</li>
+    <li>Línea 2</li>
+    <li>Línea 5</li>
+    <li>Línea 4</li>
+    <li>Línea 1</li>
+A esto: 
+    <li>Línea 1</li>
+    <li>Línea 2</li>
+    <li>Línea 3</li>
+    <li>Línea 4</li>
+    <li>Línea 5</li>
+    <li>Línea 6</li>
+    <li>Línea 7</li>
+O esto:
+    <li>Línea 7</li>
+    <li>Línea 6</li>
+    <li>Línea 5</li>
+    <li>Línea 4</li>
+    <li>Línea 3</li>
+    <li>Línea 2</li>
+    <li>Línea 1</li>
