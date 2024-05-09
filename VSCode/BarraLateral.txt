@@ -1,0 +1,8 @@
+
+//Ocultar la barra lateral:
+crtl + alt + p 
+buscar >barra actividad
+pulsar en ocultar/ ver barra actividad
+
+
+
